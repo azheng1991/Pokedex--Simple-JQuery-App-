@@ -57,6 +57,11 @@ function addListItem(pokemon) {
         .then(function (details) {
           item.imageUrl = details.sprites.front_default;
           item.height = details.height;
+          item.weight = details.weight;
+          item.types = [];
+          for (var i = 0; i < details.types.length; i++) {
+            item.types.push(details.types[i].type.name);
+          }
         })
         .catch(function (e) {
           console.error(e);
@@ -73,10 +78,14 @@ function addListItem(pokemon) {
       var imageElement = $('<img class="modal-img">');
       imageElement.attr('src', item.imageUrl);
       var heightElement = $('<p>' + 'Height: ' + item.height + 'm' + '</p>');
+      var weightElement = $("<p>" + "Weight: " + item.weight + " kg" + "</p>");
+      var typesElement = $("<p>" + "Types: " + item.types + "</p>");
 
       modalBody.append(nameElement);
       modalBody.append(imageElement);
       modalBody.append(heightElement);
+      modalBody.append(weightElement);
+      modalBody.append(typesElement);
     }
 
 
