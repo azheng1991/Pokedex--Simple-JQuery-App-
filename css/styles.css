@@ -1,0 +1,119 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 14px;
+  background-color: red;
+}
+
+header {
+  background-color: blue;
+  position: sticky;
+}
+
+footer {
+  background-color: blue;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+.social-media {
+  display: flex;
+  justify-content: center;
+}
+
+.social-media p {
+  font-size: 16px;
+  margin: 10px;
+}
+
+.pokedex {
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.list-button {
+  background-color: yellow;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  width: 10em;
+}
+
+.pokemon-list {
+list-style-type: none;
+}
+
+#modal-container {
+display: none;
+position: fixed; /* Stay in place */
+z-index: 1; /* Sit on top */
+left: 0;
+top: 0;
+width: 100%; /* Full width */
+height: 100%; /* Full height */
+overflow: auto; /* Enable scroll if needed */
+background-color: rgb(0,0,0); /* Fallback color */
+background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal {
+margin: auto;
+display: block;
+background: white;
+width: 100%;
+max-width: 1000px;
+
+}
+
+.modal h1 {
+text-align: center;
+text-transform: capitalize;
+}
+
+.modal p {
+text-align: center;
+margin-bottom: 0;
+}
+
+#modal-container.is-visible {
+display: block;
+position: fixed;
+padding: 20px;
+box-sizing: border-box;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.5);
+/* To show above other content */
+z-index: 999;
+/*Adds scroll-bar if the screen is not large enough to show all the content without scroll-bar */
+overflow: auto;
+/* Centers the modal */
+text-align: center;
+}
+
+.modal-img {
+display: block;
+margin-left: auto;
+margin-right: auto;
+width: 50%;
+height: auto;
+}
+
+.modal-close {
+float: right;
+-webkit-appearance: none;
+border: 0;
+background: none;
+color: #747057;
+text-decoration: underline;
+}
