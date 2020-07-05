@@ -2,36 +2,37 @@ var pokemonRepository = (function () {
     var repository = [];
     var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
-    //no chnages here
+
     function add(pokemon) {
       repository.push(pokemon);
     }
 
-    //no changes here
+
     function getAll() {
       return repository;
     }
 
-//Updated function using JQuery syntax
-    function addListItem(pokemon) {
-      var $pokemonList = $('.pokemon-list');
-      var $listItem = $('<li>');
-      var $button = $('<button class="list-button">' + pokemon.name + '</button>');
-      $listItem.append($button);
-      $pokemonList.append($listItem);
-      $button.on('click', function (event) {
-        showDetails(pokemon);
-      });
-    }
+//Updated to Bootstrap button
+function addListItem(pokemon) {
+    var $pokemonList = $('.pokemon-list');
+    var $button = $('<button type="button" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#exampleModal">' + pokemon.name + "</button>");
+    var $listItem = $('<li>');
+    $listItem.append($button);
+    $pokemonList.append($listItem);
+    $button.on('click', function (event) {
+      showDetails(pokemon);
+    });
+  }
 
   //no changes here
     function showDetails(item) {
       pokemonRepository.loadDetails(item).then(function () {
+        console.log(item);
         showModal(item);
       });
     }
 
-    //Updated syntax using .ajax similar to fetch
+    //no changes here
     function loadList() {
       return $.ajax(apiUrl)
         .then(function (json) {
@@ -49,7 +50,7 @@ var pokemonRepository = (function () {
         });
     }
 
-    //updated syntax using .ajax
+    //no changes here
     function loadDetails(item) {
       var url = item.detailsUrl;
       return $.ajax(url)
@@ -62,51 +63,23 @@ var pokemonRepository = (function () {
         });
     }
 
-    //Updated function using JQuery
+    //Updated function to Bootstrap modal
     function showModal(item) {
-      var $modalContainer = $('#modal-container');
-      $modalContainer.empty();
-      var modal = $('<div class="modal"></div>');
-      var closeButtonElement = $('<button class="modal-close">Close</button>');
-      closeButtonElement.on('click', hideModal);
+      var modalBody = $('.modal-body');
+      var modalTitle = $('.modal-title');
+      modalBody.empty();
+      modalTitle.empty();
       var nameElement = $('<h1>' + item.name + '</h1>');
       var imageElement = $('<img class="modal-img">');
       imageElement.attr('src', item.imageUrl);
       var heightElement = $('<p>' + 'Height: ' + item.height + 'm' + '</p>');
 
-      modal.append(closeButtonElement);
-      modal.append(nameElement);
-      modal.append(imageElement);
-      modal.append(heightElement);
-      $modalContainer.append(modal);
-
-      $modalContainer.addClass('is-visible');
+      modalBody.append(nameElement);
+      modalBody.append(imageElement);
+      modalBody.append(heightElement);
     }
 
-    //JQuery update
-    function hideModal() {
-      var $modalContainer = $('#modal-container');
-      $modalContainer.removeClass('is-visible');
-    }
 
-    //Minor JQuery update
-    jQuery(window).on('keydown', e => {
-      var $modalContainer = $('#modal-container');
-      if (e.key === 'Escape' && $modalContainer.hasClass('is-visible')) {
-        hideModal();
-      }
-    });
-
-    /*Regarding this line of code, was not sure why it has to be document query selector otherwise
-    the page does not load properly.*/
-
-    var $modalContainer = document.querySelector('#modal-container');
-    $modalContainer.addEventListener('click', e => {
-      var target = e.target;
-      if (target === $modalContainer) {
-        hideModal();
-      }
-    });
 
     return {
       add: add,
@@ -114,8 +87,8 @@ var pokemonRepository = (function () {
       addListItem: addListItem,
       loadList: loadList,
       loadDetails: loadDetails,
+      showDetails: showDetails,
       showModal: showModal,
-      hideModal: hideModal
     };
   })();
 
